@@ -24,7 +24,7 @@ except:
 
 def run(name):
     options = Options()
-    options.headless = False
+    options.headless = True
     profile = webdriver.FirefoxProfile()
     profile.set_preference("media.volume_scale", "0.0")
     driver = webdriver.Firefox(options=options, firefox_profile=profile)
@@ -57,7 +57,7 @@ def run(name):
 
 
 def spam(driver):
-    keep_running = True
+    keep_running = stop(driver)
     while keep_running:
         try:
             elem = driver.find_element_by_id("btnAds")
