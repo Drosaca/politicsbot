@@ -16,15 +16,16 @@ load_dotenv()
 try:
     EMAIL = os.getenv('EMAIL')
     PASSWORD = os.getenv('PASSWORD')
+    HEADLESS = os.getenv('HEADLESS')
     MAX = 2000000
 except:
-    print("please fill your credentials in .env file", file=sys.stderr)
+    print("Please copy .env.example to .env and modify it", file=sys.stderr)
     exit()
 
 
 def run(name):
     options = Options()
-    options.headless = True
+    options.headless = HEADLESS == 'true'
     profile = webdriver.FirefoxProfile()
     profile.set_preference("media.volume_scale", "0.0")
     driver = webdriver.Firefox(options=options, firefox_profile=profile)
