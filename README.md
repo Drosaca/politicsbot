@@ -17,6 +17,8 @@ Then, install the shitty geckodriver :
 
 Download and install : https://github.com/mozilla/geckodriver/releases/download/v0.29.0/geckodriver-v0.29.0-win64.zip
 
+---
+
 Finally copy the `.env.example` file to `.env` and edit the variables to reflect your needs.
 
 ## Coming soon
