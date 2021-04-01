@@ -18,12 +18,13 @@ try:
     PASSWORD = os.getenv('PASSWORD')
     HEADLESS = os.getenv('HEADLESS')
     MAX = 2000000
+    REWARD = 80000
 except:
     print("Please copy .env.example to .env and modify it", file=sys.stderr)
     exit()
 
 
-def run(name):
+def run():
     options = Options()
     options.headless = HEADLESS == 'true'
     profile = webdriver.FirefoxProfile()
@@ -57,33 +58,62 @@ def run(name):
     driver.close()  # Press Ctrl+F8 to toggle the breakpoint.
 
 
+FIRST_AMOUNT = 0
+HARVESTED = 1
+
+
 def spam(driver):
-    keep_running = stop(driver)
+    wallet = [get_actual_amount(driver), 0]
+    keep_running = should_continue(driver)
     while keep_running:
         try:
             elem = driver.find_element_by_id("btnAds")
             elem.click()
             time.sleep(2)
+            wallet[HARVESTED] += REWARD
             print("waiting 120s...")
             time.sleep(120)
         except:
             print("waiting more 10s...")
             time.sleep(10)
-        keep_running = stop(driver)
+        keep_running = should_continue(driver, wallet)
     print("exiting...")
 
 
-def stop(driver):
+def should_continue(driver, wallet=[0, 0]):
     try:
         elem = driver.find_element_by_id("rewarded_ads_earnings_today")
         amount = int(elem.text.replace(',', ''))
-        print(amount)
+        print(amount, ' <---> ', wallet[FIRST_AMOUNT] + wallet[HARVESTED])
         if int(amount) >= MAX:
             print("Maximum amount of money reached")
             return False
+        if int(wallet[FIRST_AMOUNT] + wallet[HARVESTED] > MAX):
+            print("incoherent values refreshing...")
+            refresh(driver)
+            time.sleep(4)
+            wallet[FIRST_AMOUNT] = get_actual_amount(driver)
+            wallet[HARVESTED] = 0
+            if wallet[FIRST_AMOUNT] >= MAX:
+                return False
         return True
     except:
         return True
+
+
+def refresh(driver):
+    ads = driver.find_element_by_css_selector("a[href='https://politicsandwar.com/rewarded-ads/']")
+    ads.click()
+
+
+def get_actual_amount(driver):
+    try:
+        elem = driver.find_element_by_id("rewarded_ads_earnings_today")
+        amount = int(elem.text.replace(',', ''))
+        return amount
+    except:
+        return 0
+
 
 def try_mute(driver: webdriver):
     try:
@@ -99,6 +129,6 @@ def try_mute(driver: webdriver):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    run('PyCharm')
+    run()
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
