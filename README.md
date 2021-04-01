@@ -1,6 +1,6 @@
 # politicsbot
 
-A bot to watch the ads on Politics&War
+A bot to watch the ads.
 
 ## Getting started
 
