@@ -12,3 +12,7 @@ Then, install the shitty geckodriver :
 * `sudo mv geckodriver /usr/local/bin`
 
 Finally copy the `.env.example` file to `.env` and edit the variables to reflect your needs.
+
+## Coming soon
+
+- Windows executable for no0bz
