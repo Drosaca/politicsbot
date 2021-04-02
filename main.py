@@ -1,30 +1,27 @@
-# This is a sample Python script.
-
-# Press Maj+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox.options import Options
 from dotenv import load_dotenv
 import time
 import os
 import sys
 
-load_dotenv()
-
+print('Welcome')
 try:
+    load_dotenv()
     EMAIL = os.getenv('EMAIL')
     PASSWORD = os.getenv('PASSWORD')
     HEADLESS = os.getenv('HEADLESS')
     MAX = 2000000
     REWARD = 80000
+    if not EMAIL or not PASSWORD:
+        raise Exception
+    print('environement loaded')
 except:
     print("Please copy .env.example to .env and modify it", file=sys.stderr)
     exit()
 
 
-def run():
+def main():
     options = Options()
     options.headless = HEADLESS == 'true'
     profile = webdriver.FirefoxProfile()
@@ -127,8 +124,5 @@ def try_mute(driver: webdriver):
         print("fail to mute")
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    run()
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    main()
