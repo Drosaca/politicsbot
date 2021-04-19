@@ -19,6 +19,13 @@ Download and install : https://github.com/mozilla/geckodriver/releases/download/
 
 ---
 
+#### WSL
+
+Install codec drivers and all other shitty missing things
+
+sudo apt install libavcodec-extra
+sudo apt install ubuntu-restricted-extras
+
 Finally copy the `.env.example` file to `.env` and edit the variables to reflect your needs.
 
 ## Coming soon
