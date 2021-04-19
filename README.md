@@ -17,16 +17,17 @@ Then, install the shitty geckodriver :
 
 Download and install : https://github.com/mozilla/geckodriver/releases/download/v0.29.0/geckodriver-v0.29.0-win64.zip
 
----
 
 #### WSL
 
 Install codec drivers and all other shitty missing things
 
-sudo apt install libavcodec-extra
-sudo apt install ubuntu-restricted-extras
+- `sudo apt install libavcodec-extra`
+- `sudo apt install ubuntu-restricted-extras`
 
 Finally copy the `.env.example` file to `.env` and edit the variables to reflect your needs.
+
+---
 
 ## Coming soon
 
