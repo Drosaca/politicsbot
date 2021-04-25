@@ -39,6 +39,8 @@ def main():
     elem.send_keys(EMAIL)
     elem = driver.find_element_by_name("password")
     elem.send_keys(PASSWORD)
+    elem = driver.find_element_by_id("loginbox")
+    elem.click()
     elem = driver.find_element_by_name("loginform")
     elem.click()
     print('logging...')
