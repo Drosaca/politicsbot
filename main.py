@@ -50,8 +50,13 @@ def main():
         elem[0].click()
     except:
         pass
-    ads = driver.find_element_by_css_selector("a[href='https://politicsandwar.com/rewarded-ads/']")
-    ads.click()
+    try:
+        driver.get("https://politicsandwar.com/rewarded-ads/")
+        time.sleep(2)
+        #ads = driver.find_element_by_css_selector("a[href='https://politicsandwar.com/rewarded-ads/']")
+        #ads.click()
+    except Exception as e:
+        print(e)
     print('watching')
     time.sleep(3)
     spam(driver)
@@ -61,6 +66,8 @@ def main():
 FIRST_AMOUNT = 0
 HARVESTED = 1
 
+def recaptcha(driver):
+    pass
 
 def spam(driver):
     wallet = [get_actual_amount(driver), 0]
